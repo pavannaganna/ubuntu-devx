@@ -59,6 +59,7 @@ RUN rm .zshrc && ln -s .config/zsh/.zshrc .zshrc
 
 # Setup NVIM with all plugins
 WORKDIR /home/developer/.config/nvim/plugin
+# See https://github.com/wbthomason/packer.nvim/issues/502
 RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 WORKDIR /home/developer
