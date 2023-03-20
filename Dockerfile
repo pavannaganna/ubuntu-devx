@@ -58,7 +58,9 @@ COPY zsh  .config/zsh
 RUN rm .zshrc && ln -s .config/zsh/.zshrc .zshrc
 
 # Setup NVIM with all plugins
-RUN chmod 777 /home/developer
-RUN nvim -E -s -u /home/developer/.config/nvim +PackerUpdate +qa
+WORKDIR /home/developer/.config/nvim/plugin
+RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+WORKDIR /home/developer
 
 ENTRYPOINT /usr/bin/zsh
